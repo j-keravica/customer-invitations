@@ -1,14 +1,10 @@
 const EARTH_RADIUS = 6371;
 
-const degreesToRadians = degrees => degrees * (Math.PI / 180);
-
-const calculateDistance = (point1, point2) => {
-    const { longitude: long1, latitude: lat1 } = point1;
-    const { longitude: long2, latitude: lat2 } = point2;
-    const lat1Rad = degreesToRadians(lat1);
-    const lat2Rad = degreesToRadians(lat2);
-    const long1Rad = degreesToRadians(long1);
-    const long2Rad = degreesToRadians(long2);
+exports.calculateDistance = (point1, point2) => {
+    const lat1Rad = point1.getRadLatitude();
+    const lat2Rad = point2.getRadLatitude();
+    const long1Rad = point1.getRadLongitude();
+    const long2Rad = point2.getRadLongitude();
 
     const deltaLong = Math.abs(long1Rad - long2Rad);
 
@@ -19,16 +15,3 @@ const calculateDistance = (point1, point2) => {
 
     return centralAngle * EARTH_RADIUS;
 }
-
-const d1 = calculateDistance(
-    { latitude: 44.49, longitude: 20.28 },
-    { latitude: 45.15, longitude: 19.51 }
-);
-
-const d2 = calculateDistance(
-    { latitude: 44.49, longitude: 20.28 },
-    { latitude: 40.42, longitude: -74 }
-);
-
-console.log(d1);
-console.log(d2);
