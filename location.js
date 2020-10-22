@@ -1,4 +1,4 @@
-class Point {
+class Location {
     constructor(longitude, latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
@@ -17,4 +17,4 @@ class Point {
     }
 }
 
-module.exports = Point;
+module.exports = Location;

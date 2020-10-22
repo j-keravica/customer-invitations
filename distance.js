@@ -1,7 +1,7 @@
-const Point = require("./point");
+const Location = require("./location");
 
 const EARTH_RADIUS = 6371;
-const DUBLIN_OFFICE = new Point(-6.257664, 53.339428);
+const DUBLIN_OFFICE = new Location(-6.257664, 53.339428);
 
 const calculateDistance = (point1, point2) => {
     const lat1Rad = point1.getRadLatitude();
@@ -20,6 +20,7 @@ const calculateDistance = (point1, point2) => {
 }
 
 exports.checkOfficeDistance = (customer) => {
-    const customerLocation = new Point(customer.longitude, customer.latitude);
+    const customerLocation =
+        new Location(customer.longitude, customer.latitude);
     return calculateDistance(DUBLIN_OFFICE, customerLocation) < 100;
 }
