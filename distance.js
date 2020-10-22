@@ -3,11 +3,11 @@ const Location = require("./location");
 const EARTH_RADIUS = 6371;
 const DUBLIN_OFFICE = new Location(-6.257664, 53.339428);
 
-const calculateDistance = (point1, point2) => {
-    const lat1Rad = point1.getRadLatitude();
-    const lat2Rad = point2.getRadLatitude();
-    const long1Rad = point1.getRadLongitude();
-    const long2Rad = point2.getRadLongitude();
+const calculateDistance = (location1, location2) => {
+    const lat1Rad = location1.getRadLatitude();
+    const lat2Rad = location2.getRadLatitude();
+    const long1Rad = location1.getRadLongitude();
+    const long2Rad = location2.getRadLongitude();
 
     const deltaLong = Math.abs(long1Rad - long2Rad);
 

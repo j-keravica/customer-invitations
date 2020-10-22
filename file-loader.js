@@ -5,10 +5,9 @@ const { once } = require("events");
 exports.readFile = async () => {
   try {
     const customers = [];
-    const fileStream = fs.createReadStream("customers.txt");
 
     const rl = readline.createInterface({
-      input: fileStream,
+      input: fs.createReadStream("customers.txt"),
       crlfDelay: Infinity
     });
 
