@@ -19,7 +19,7 @@ const calculateDistance = (location1, location2) => {
     return centralAngle * EARTH_RADIUS;
 }
 
-exports.checkOfficeDistance = (customer) => {
+exports.isNear = (customer) => {
     const customerLocation =
         new Location(customer.longitude, customer.latitude);
     return calculateDistance(DUBLIN_OFFICE, customerLocation) < 100;
