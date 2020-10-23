@@ -1,0 +1,10 @@
+{
+  "name": "customer-invitations",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Jelena Keravica>",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^26.6.0"
+  }
+}
