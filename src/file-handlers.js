@@ -1,30 +1,43 @@
 const fs = require("fs");
 const readline = require("readline");
-const { once } = require("events");
 
-exports.readFromFile = async filePath => {
-  try {
-    const customers = [];
-
-    const fileStream = fs.createReadStream(filePath);
-    const rl = readline.createInterface({
-      input: fileStream,
-      crlfDelay: Infinity
+const createReadStreamAsync = filename => {
+  return new Promise((resolve, reject) => {
+    const fileStream = fs.createReadStream(filename);
+    fileStream.on("error", reject).on("open", () => {
+      resolve(fileStream);
     });
-    rl.on("line", line => {
-      customers.push(JSON.parse(line));
-    });
-    await once(rl, "close");
+  });
+}
 
-    return customers;
-  } catch (err) {
-    throw err;
+const readFromFile = async (filename = "customers.txt") => {
+  const customers = [];
+
+  const fileStream = await createReadStreamAsync(filename);
+  const rl = readline.createInterface({
+    input: fileStream
+  });
+
+  for await (const line of rl) {
+    customers.push(JSON.parse(line));
   }
+
+  return customers;
 };
 
-exports.writeToFile = customers => {
-  const fileContent = customers
+const formatOutput = customers => {
+  return customers
+    .sort((c1, c2) => c1.user_id - c2.user_id)
     .map(customer => `${customer.user_id} ${customer.name}`)
     .join("\n");
-  fs.writeFileSync("output.txt", fileContent);
+}
+
+const writeToFile = (customers, filePath = "output.txt") => {
+  const fileContent = formatOutput(customers);
+  fs.writeFileSync(filePath, fileContent);
+};
+
+module.exports = {
+  readFromFile,
+  writeToFile
 };

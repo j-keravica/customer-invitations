@@ -25,7 +25,7 @@ const calculateDistance = (location1, location2) => {
 }
 
 const isNearby = (location) => {
-    if (!isValidLocation) {
+    if (!isValidLocation(location)) {
         return false;
     }
     return calculateDistance(DUBLIN_OFFICE, location) < DISTANCE_RADIUS;
