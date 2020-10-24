@@ -1,7 +1,12 @@
-const Location = require("./location");
+const { DUBLIN_OFFICE, DISTANCE_RADIUS } = require('./constants');
 
 const EARTH_RADIUS = 6371;
-const DUBLIN_OFFICE = new Location(-6.257664, 53.339428);
+
+const isValidLocation = location => {
+    const { latitude: lat, longitude: long } = location;
+    return lat <= 90 && lat >= -90 &&
+        long <= 180 && long >= -180;
+}
 
 const calculateDistance = (location1, location2) => {
     const lat1Rad = location1.getRadLatitude();
@@ -19,8 +24,13 @@ const calculateDistance = (location1, location2) => {
     return centralAngle * EARTH_RADIUS;
 }
 
-exports.isNear = (customer) => {
-    const customerLocation =
-        new Location(customer.longitude, customer.latitude);
-    return calculateDistance(DUBLIN_OFFICE, customerLocation) < 100;
+const isNearby = (location) => {
+    if (!isValidLocation) {
+        return false;
+    }
+    return calculateDistance(DUBLIN_OFFICE, location) < DISTANCE_RADIUS;
 }
+
+module.exports = {
+    isNearby
+};

@@ -1,30 +1,38 @@
-const { isNear } = require('../src/distance');
+const { DUBLIN_OFFICE } = require('../src/constants');
+const { isNearby } = require('../src/distance');
+const Location = require('../src/location');
 
-describe('#isNear', () => {
-    it('returns true if customer is within 100km of Dublin office', () => {
-        const guiness = {
-            latitude: 53.3435462,
-            longitude: -6.2808661,
-            name: 'Guiness',
-            user_id: 123
-        };
-        const mullingar = {
-            latitude: 53.3736511,
-            longitude: -6.3671953,
-            name: 'Mullingar',
-            user_id: 456
-        };
-        expect(isNear(guiness)).toBe(true);
-        expect(isNear(mullingar)).toBe(true);
-    });
+describe('Distance calculations', () => {
+    describe('#isNearby', () => {
+        it('returns true for locations near Dublin office', () => {
+            const stStephensGreen = new Location(53.3393864, -6.2586152);
+            const mullingar = new Location(53.3736511, -6.3671953);
 
-    it('returns false if customer is not within 100km of Dublin office', () => {
-        const athlone = {
-            latitude: 53.4232399,
-            longitude: -7.9666102,
-            name: 'Athlone',
-            user_id: 789
-        };
-        expect(isNear(athlone)).toBe(false);
-    });
+            expect(isNearby(stStephensGreen)).toBe(true);
+            expect(isNearby(mullingar)).toBe(true);
+            expect(isNearby(DUBLIN_OFFICE)).toBe(true);
+        });
+    
+        it('returns false for locations not near Dublin office', () => {
+            const athlone = new Location(53.4232399, -7.9666102);
+            const brisbane = new Location(-27.3818617, 152.7123185);
+            const southPole = new Location(-90, -180);
+
+            expect(isNearby(athlone)).toBe(false);
+            expect(isNearby(brisbane)).toBe(false);
+            expect(isNearby(southPole)).toBe(false);
+        });
+
+        it('returns false for invalid locations', () => {
+            const invalidLocation1 = new Location(1000.4232399, -7.9666102);
+            const invalidLocation2 = new Location(27.3818617, -181.9666102);
+            const invalidLocation3 = new Location(NaN, NaN);
+            const invalidLocation4 = new Location();
+
+            expect(isNearby(invalidLocation1)).toBe(false);
+            expect(isNearby(invalidLocation2)).toBe(false);
+            expect(isNearby(invalidLocation3)).toBe(false);
+            expect(isNearby(invalidLocation4)).toBe(false);
+        });
+    })
 })
