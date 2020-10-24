@@ -10,7 +10,7 @@ const createReadStreamAsync = filename => {
   });
 }
 
-const readFromFile = async (filename = "customers.txt") => {
+const readFromFile = async (filename) => {
   const customers = [];
 
   const fileStream = await createReadStreamAsync(filename);
@@ -32,9 +32,9 @@ const formatOutput = customers => {
     .join("\n");
 }
 
-const writeToFile = (customers, filePath = "output.txt") => {
+const writeToFile = (customers, filename) => {
   const fileContent = formatOutput(customers);
-  fs.writeFileSync(filePath, fileContent);
+  fs.writeFileSync(filename, fileContent);
 };
 
 module.exports = {

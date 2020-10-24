@@ -1,5 +1,5 @@
 const { readFromFile, writeToFile } = require("../src/file-handlers");
-const fs = require('fs');
+const fs = require("fs");
 const mockFs = require("mock-fs");
 
 describe("File handlers", () => {
@@ -64,7 +64,7 @@ describe("File handlers", () => {
     beforeEach(() => {
       mockFs();
     });
-      
+
     afterEach(() => {
       mockFs.restore();
     });
@@ -90,7 +90,7 @@ describe("File handlers", () => {
           name: "Jane Smith"
         }
       ];
-      const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync');
+      const writeFileSyncSpy = jest.spyOn(fs, "writeFileSync");
       writeToFile(nearbyCustomers, "invited-customers.txt");
 
       expect(writeFileSyncSpy).toHaveBeenCalledWith(
@@ -100,17 +100,13 @@ describe("File handlers", () => {
     });
 
     it("writes an empty file if there are no nearby customers", () => {
-      const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync');
+      const writeFileSyncSpy = jest.spyOn(fs, "writeFileSync");
       writeToFile([], "invited-customers.txt");
 
-      expect(writeFileSyncSpy).toHaveBeenCalledWith("invited-customers.txt", "");
-    });
-
-    it("writes to output.txt if no file specified", () => {
-      const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync');
-      writeToFile([]);
-
-      expect(writeFileSyncSpy).toHaveBeenCalledWith("output.txt", "");
+      expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        "invited-customers.txt",
+        ""
+      );
     });
   });
 });

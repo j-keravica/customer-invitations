@@ -1,5 +1,8 @@
 const { filterCustomers } = require('./filtering');
 
 (async () => {
-  await filterCustomers().catch(console.log);
+  const args = process.argv.slice(2);
+  const inputFilename = args[0];
+  const outputFilename = args[1];
+  await filterCustomers(inputFilename, outputFilename).catch(console.log);
 })();
