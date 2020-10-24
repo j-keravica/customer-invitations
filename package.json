@@ -5,7 +5,7 @@
   "author": "Jelena Keravica>",
   "license": "MIT",
   "scripts": {
-    "test": "jest --detectOpenHandles",
+    "test": "jest",
     "filter-customers": "node src/app.js"
   },
   "devDependencies": {
