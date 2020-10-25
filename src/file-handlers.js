@@ -8,9 +8,9 @@ const createReadStreamAsync = filename => {
       resolve(fileStream);
     });
   });
-}
+};
 
-const readFromFile = async (filename) => {
+const readFromFile = async filename => {
   const customers = [];
 
   const fileStream = await createReadStreamAsync(filename);
@@ -30,7 +30,7 @@ const formatOutput = customers => {
     .sort((c1, c2) => c1.user_id - c2.user_id)
     .map(customer => `${customer.user_id} ${customer.name}`)
     .join("\n");
-}
+};
 
 const writeToFile = (customers, filename) => {
   const fileContent = formatOutput(customers);
