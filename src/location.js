@@ -1,19 +1,19 @@
+const degreesToRadians = (degrees) => {
+    return degrees * (Math.PI / 180);
+};
+
 class Location {
     constructor(latitude, longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    degreesToRadians(degrees) {
-        return degrees * (Math.PI / 180);
-    }
-
     getRadLatitude() {
-        return this.degreesToRadians(this.latitude)
+        return degreesToRadians(this.latitude)
     }
 
     getRadLongitude() {
-        return this.degreesToRadians(this.longitude)
+        return degreesToRadians(this.longitude)
     }
 }
 

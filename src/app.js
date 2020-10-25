@@ -4,5 +4,5 @@ const { filterCustomers } = require('./filtering');
   const args = process.argv.slice(2);
   const inputFilename = args[0];
   const outputFilename = args[1];
-  await filterCustomers(inputFilename, outputFilename).catch(console.log);
+  await filterCustomers(inputFilename, outputFilename).catch(console.error);
 })();

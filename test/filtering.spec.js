@@ -2,7 +2,7 @@ const fs = require("fs");
 const mockFs = require("mock-fs");
 const { filterCustomers } = require("../src/filtering");
 
-describe("Filtering customers", () => {
+describe("#filterCustomers", () => {
 
   afterEach(() => {
     mockFs.restore();
