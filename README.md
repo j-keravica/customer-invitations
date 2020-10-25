@@ -8,7 +8,7 @@ Prerequisites: Node v11.4.0 or higher.
 
 ```
 yarn install
-yarn filter-customers [input file path] [output file path]
+yarn filter-customers 'input-file-path' 'output-file-path'
 ```
 This runs `src/app.js`. Input and output file paths are optional arguments, relative to the project folder. The command will read from `customers.txt` and output to `output.txt` by default.
 
