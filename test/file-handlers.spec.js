@@ -48,14 +48,12 @@ describe("File handlers", () => {
     it("throws an error if file contents cannot be parsed", async () => {
       expect(async () => {
         await readFromFile("gibberish.txt");
-        mockFs.restore();
       }).rejects.toThrow();
     });
 
     it("throws an error if file is not a txt file", async () => {
       expect(async () => {
         await readFromFile("image.png");
-        mockFs.restore();
       }).rejects.toThrow();
     });
   });
@@ -107,6 +105,10 @@ describe("File handlers", () => {
         "invited-customers.txt",
         ""
       );
+    });
+
+    it("throws an error if file path does not exist", () => {
+      expect(() => writeToFile([], "fakeDir/invited-customers.txt")).toThrow();
     });
   });
 });

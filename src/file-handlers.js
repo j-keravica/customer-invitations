@@ -33,8 +33,8 @@ const formatOutput = customers => {
 };
 
 const writeToFile = (customers, filename) => {
-  const fileContent = formatOutput(customers);
-  fs.writeFileSync(filename, fileContent);
+    const fileContent = formatOutput(customers);
+    fs.writeFileSync(filename, fileContent);
 };
 
 module.exports = {
